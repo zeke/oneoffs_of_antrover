@@ -27,19 +27,13 @@ def create_thumb(image)
   puts "Saved thumb for #{File.basename(image.filename)}"
 end
 
-threads = []
-
 Dir.entries(PATH).each do |file|
-  threads << Thread.new(file) {|this_file|
-    begin
-      image = Magick::Image::read(File.join(PATH, file)).first
-      scale_image(image)
-      create_thumb(image)
-    rescue Exception => e
-      puts e.inspect
-    end
-    ObjectSpace.garbage_collect
-  }
+  begin
+    image = Magick::Image::read(File.join(PATH, file)).first
+    scale_image(image)
+    create_thumb(image)
+  rescue Magick::ImageMagickError
+  rescue NoMethodError
+  end
+  ObjectSpace.garbage_collect
 end
-
-threads.each {|x|x.join}
