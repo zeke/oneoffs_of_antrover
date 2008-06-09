@@ -4,6 +4,9 @@ require 'RMagick'
 require 'thread'
 include ObjectSpace
 
+# ./dhresize.rb "/Users/dave/Desktop/Vacation Pics/" 40
+# ./dhresize.rb #{path to directory filled with images} #{percent to scale images}
+
 PATH = ARGV[0]
 SCALE = ARGV[1].to_f
 
