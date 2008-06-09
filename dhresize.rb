@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 require 'rubygems'
 require 'RMagick'
-require 'thread'
 include ObjectSpace
 
 # ./dhresize.rb "/Users/dave/Desktop/Vacation Pics/" 40
