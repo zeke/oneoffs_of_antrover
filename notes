@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+# Make this script executeable and add it to your path.
+# Type 'notes' and a new blank textmate document opens with a heading (aka: a template!)
+# Change PATH_TO_NOTES_DIR to point to some directory where you want to store your notes.
+
+PATH_TO_NOTES_DIR = "/Users/dave/Documents/Notes"
+CURRENT_TIME      = Time.now
+NEW_FILE_PATH     = File.join(PATH_TO_NOTES_DIR, "#{CURRENT_TIME.to_i.to_s}.txt")
+
+def create_header
+  string =  "==================================================\n"
+  string += "Notes created at: #{CURRENT_TIME.to_s}\n"
+  string += "==================================================\n\n"
+  string
+end
+
+def create_empty_notes_skeleton
+  File.open(NEW_FILE_PATH, "w+") do |file|
+    file.write create_header
+  end
+end
+
+create_empty_notes_skeleton
+exec("mate -l 5 #{NEW_FILE_PATH}")

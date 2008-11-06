@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby 
+
+# Make this script executeable and place it in your path.
+# This script works in conjunction with 'notes' located in the same repository as this one.
+# This will combine all your notes that the 'notes' script created into one master document.
+
+# Change PATH_TO_MASTER_NOTES_DIR to point where you want the master notes file to live
+# Change PATH_TO_NOTES_DIR where the 'notes' script created all the notes files.
+
+PATH_TO_MASTER_NOTES_DIR  = "/Users/dave/Documents/Notes/master"
+PATH_TO_NOTES_DIR         = "/Users/dave/Documents/Notes"
+
+# The size of an 'empty file' including the template header text.
+EMPTY_FILE_SIZE = 152
+
+def create_master_note_file(file_paths)
+  File.open(File.join(PATH_TO_MASTER_NOTES_DIR, "master.txt"), "w+") do |file|
+    file_paths.each do |file_path|
+      File.open(file_path, "r") do |note_file|
+        file.write note_file.read + "\n\n\n"
+      end
+    end
+  end
+end
+
+file_paths_to_join = []
+Dir.glob("#{PATH_TO_NOTES_DIR}/*.txt") .each do |file_path|
+  if File.stat(file_path).size == EMPTY_FILE_SIZE
+    File.delete(file_path)
+  else
+    puts "Adding to the cue: #{file_path}"
+    file_paths_to_join << file_path
+  end
+end
+
+create_master_note_file(file_paths_to_join)
