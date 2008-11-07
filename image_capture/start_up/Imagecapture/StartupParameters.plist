@@ -1,0 +1,7 @@
+{
+  Description     = "Image Capture";
+  Provides        = ("Capture images using iSight unobtrusively");
+  Requires        = ("");
+  Uses            = ("");
+  OrderPreference = "Late";
+}

@@ -1,0 +1,28 @@
+#!/bin/sh
+
+##
+# Start captureing iSight images
+##
+
+. /etc/rc.common
+
+StartService ()
+{
+    ConsoleMessage "Starting Image Capture"
+    /Users/dave/scripts/image_capture/control.rb start
+}
+
+StopService ()
+{
+    ConsoleMessage "Stopping Image Capture"
+    /Users/dave/scripts/image_capture/control.rb stop
+}
+
+RestartService ()
+{
+    ConsoleMessage "Restarting Image Capture"
+		/Users/dave/scripts/image_capture/control.rb restart
+}
+
+
+RunService "$1"
