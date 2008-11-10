@@ -1,0 +1,5 @@
+flickr_api_key:
+  value: YOUR_API_KEY
+    
+flickr_shared_secret:
+  value: YOUR_SECRET_KEY

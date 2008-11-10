@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>pull_photos (PhotosInASet)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File flickr_photos_in_a_set.rb, line 49</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pull_photos</span>
+    <span class="ruby-comment cmt"># Grab the photo set from flickr</span>
+    <span class="ruby-identifier">photos</span> = <span class="ruby-identifier">flickr</span>.<span class="ruby-identifier">photosets</span>.<span class="ruby-identifier">getPhotos</span>(<span class="ruby-identifier">:photoset_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">set_number</span>, <span class="ruby-identifier">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'2000'</span>, <span class="ruby-identifier">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'1'</span>)
+    
+    <span class="ruby-comment cmt"># Iterate through each photo checking to see if the &quot;Original&quot; size exists in the returned XML</span>
+    <span class="ruby-identifier">photos</span>.<span class="ruby-identifier">photo</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">photo</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">available_image_sizes</span> = <span class="ruby-identifier">flickr</span>.<span class="ruby-identifier">photos</span>.<span class="ruby-identifier">getSizes</span>(<span class="ruby-identifier">:photo_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">photo</span>.<span class="ruby-identifier">id</span>)
+        <span class="ruby-identifier">original_image_url</span> = <span class="ruby-identifier">available_image_sizes</span>.<span class="ruby-identifier">find</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">label</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;Original&quot;</span>}.<span class="ruby-identifier">source</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;\\&quot;</span>,<span class="ruby-value str">&quot;&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot; &quot;</span>, <span class="ruby-value str">&quot;&quot;</span>)
+        
+        <span class="ruby-comment cmt"># Only save the image if it doesn't exist in the save directory</span>
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">save_directory</span>,<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">original_image_url</span>)))
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Downloading: #{original_image_url}&quot;</span>
+          <span class="ruby-identifier">url</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">original_image_url</span>)
+          <span class="ruby-identifier">req</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">url</span>.<span class="ruby-identifier">path</span>)
+          <span class="ruby-identifier">res</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">start</span>(<span class="ruby-identifier">url</span>.<span class="ruby-identifier">host</span>, <span class="ruby-identifier">url</span>.<span class="ruby-identifier">port</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">http</span><span class="ruby-operator">|</span><span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">req</span>)}
+          <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">save_directory</span>,<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">original_image_url</span>)), <span class="ruby-value str">'wb'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">file</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">res</span>.<span class="ruby-identifier">body</span>) <span class="ruby-comment cmt"># write the image file</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-comment cmt"># If the image already exists, we'll skip the download of the image.</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Skipping #{original_image_url}&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-comment cmt"># Shouldn't have to do this shizzz... but it cuts memory useage in half! (on my box: MBP 2.667 2gb RAM)</span>
+        <span class="ruby-constant">GC</span>.<span class="ruby-identifier">start</span>
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">NoMethodError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+        <span class="ruby-comment cmt"># this will happen if 'source' isn't in the returned XML because the user decided to hide the original size</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Photo unavailable - #{photo.id}&quot;</span>
+        <span class="ruby-keyword kw">next</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

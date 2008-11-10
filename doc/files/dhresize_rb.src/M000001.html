@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>scale_image (dhresize.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File dhresize.rb, line 18</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">scale_image</span>(<span class="ruby-identifier">image</span>)
+  <span class="ruby-identifier">resized_image</span> = <span class="ruby-identifier">image</span>.<span class="ruby-identifier">scale</span>(<span class="ruby-constant">SCALE</span> <span class="ruby-operator">*</span> <span class="ruby-value">0</span><span class="ruby-value">.01</span>)
+  <span class="ruby-identifier">resized_image</span>.<span class="ruby-identifier">write</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">RESIZED_IMAGES</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">filename</span>)))
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Saved scaled image for #{File.basename(image.filename)}&quot;</span>
+<span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
