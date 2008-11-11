@@ -10,7 +10,7 @@
 #
 # == Useage
 # * Make executeable and use like so:
-# * ./flickr_photos_in_a_set.rb USER_NAME /path/to/save/directory
+# * ./flickr_all_users_photos.rb USER_NAME /path/to/save/directory
 #
 # == Required gems
 # * rubygems
