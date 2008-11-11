@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File flickr_photos_in_a_set.rb, line 32</span>
+  <pre><span class="ruby-comment cmt"># File flickr_photos_in_a_set.rb, line 40</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">args</span> = {})
     <span class="ruby-ivar">@save_directory</span> = <span class="ruby-identifier">args</span>[<span class="ruby-identifier">:save_directory</span>]
     <span class="ruby-ivar">@set_number</span>     = <span class="ruby-identifier">args</span>[<span class="ruby-identifier">:set_number</span>]
@@ -19,6 +19,8 @@
     <span class="ruby-identifier">config</span>                  = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-constant">CONFIG_PATH</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">yf</span><span class="ruby-operator">|</span> <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load</span>( <span class="ruby-identifier">yf</span> ) }
     <span class="ruby-constant">FlickRaw</span>.<span class="ruby-identifier">api_key</span>        = <span class="ruby-identifier">config</span>[<span class="ruby-value str">&quot;flickr_api_key&quot;</span>][<span class="ruby-value str">&quot;value&quot;</span>]
     <span class="ruby-constant">FlickRaw</span>.<span class="ruby-identifier">shared_secret</span>  = <span class="ruby-identifier">config</span>[<span class="ruby-value str">&quot;flickr_shared_secret&quot;</span>][<span class="ruby-value str">&quot;value&quot;</span>]
+    
+    <span class="ruby-comment cmt"># Create the save directory if it doesn't exist</span>
     <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir</span>(<span class="ruby-ivar">@save_directory</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@save_directory</span>)
   <span class="ruby-keyword kw">end</span></pre>
 </body>

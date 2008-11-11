@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Class: PhotosInASet</title>
+  <title>Class: UserPhotos</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
   <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
@@ -50,13 +50,13 @@
         <table class="header-table">
         <tr class="top-aligned-row">
           <td><strong>Class</strong></td>
-          <td class="class-name-in-header">PhotosInASet</td>
+          <td class="class-name-in-header">UserPhotos</td>
         </tr>
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../files/flickr_photos_in_a_set_rb.html">
-                flickr_photos_in_a_set.rb
+                <a href="../files/flickr_all_users_photos_rb.html">
+                flickr_all_users_photos.rb
                 </a>
         <br />
             </td>
@@ -80,9 +80,10 @@
 
     <div id="description">
       <p>
-This class will pull photos from flickr in a specified set. Must have a
-config.yaml in the same directory as this class specifying your api key and
-shared secret key. See config.yaml.example included in this directory.
+This class will pull all of a user&#8216;s original sized images from
+flickr. Must have a config.yaml in the same directory as this class
+specifying your api key and shared secret key. See config.yaml.example
+included in this directory.
 </p>
 
     </div>
@@ -94,8 +95,8 @@ shared secret key. See config.yaml.example included in this directory.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000006">new</a>&nbsp;&nbsp;
-      <a href="#M000007">pull_photos</a>&nbsp;&nbsp;
+      <a href="#M000008">new</a>&nbsp;&nbsp;
+      <a href="#M000009">pull_photos</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -151,7 +152,7 @@ flickr_shared_secret:
           <td class="context-item-desc"></td>
         </tr>
         <tr class="top-aligned-row context-row">
-          <td class="context-item-name">set_number</td>
+          <td class="context-item-name">user_name</td>
           <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
           <td class="context-item-desc"></td>
         </tr>
@@ -165,24 +166,25 @@ flickr_shared_secret:
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000006" class="method-detail">
-        <a name="M000006"></a>
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
 
         <div class="method-heading">
-          <a href="PhotosInASet.src/M000006.html" target="Code" class="method-signature"
-            onclick="popupCode('PhotosInASet.src/M000006.html');return false;">
+          <a href="UserPhotos.src/M000008.html" target="Code" class="method-signature"
+            onclick="popupCode('UserPhotos.src/M000008.html');return false;">
           <span class="method-name">new</span><span class="method-args">(args = {})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-When creating a <a href="PhotosInASet.html#M000006">new</a> <a
-href="PhotosInASet.html">PhotosInASet</a> object, specify these arguments:
+Pass in the following args in the hash:
 </p>
 <ul>
-<li>{:save_directory =&gt; &#8217;/Users/dave/Desktop/flickr_photos&#8217;,
-:set_number =&gt; 1111111}
+<li>:save_directory =&gt; save_directory
+
+</li>
+<li>:user_name =&gt; username
 
 </li>
 </ul>
@@ -191,36 +193,17 @@ href="PhotosInASet.html">PhotosInASet</a> object, specify these arguments:
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000007" class="method-detail">
-        <a name="M000007"></a>
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
 
         <div class="method-heading">
-          <a href="PhotosInASet.src/M000007.html" target="Code" class="method-signature"
-            onclick="popupCode('PhotosInASet.src/M000007.html');return false;">
+          <a href="UserPhotos.src/M000009.html" target="Code" class="method-signature"
+            onclick="popupCode('UserPhotos.src/M000009.html');return false;">
           <span class="method-name">pull_photos</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
-          <p>
-Download the images from flickr based on the set number and store them in
-the specified save_directory.
-</p>
-<ul>
-<li>Uses flickraw to get all the IDS of the images in a set
-
-</li>
-<li>Iterates through each photo and uses flickraw to download the
-&#8216;Original&#8217; size
-
-</li>
-<li>Downloads the &#8216;Original&#8217; image if it exists
-
-</li>
-<li>Saves the &#8216;Original&#8217; image in the specified save_directory
-
-</li>
-</ul>
         </div>
       </div>
 

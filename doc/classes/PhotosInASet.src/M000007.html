@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File flickr_photos_in_a_set.rb, line 49</span>
+  <pre><span class="ruby-comment cmt"># File flickr_photos_in_a_set.rb, line 59</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pull_photos</span>
     <span class="ruby-comment cmt"># Grab the photo set from flickr</span>
     <span class="ruby-identifier">photos</span> = <span class="ruby-identifier">flickr</span>.<span class="ruby-identifier">photosets</span>.<span class="ruby-identifier">getPhotos</span>(<span class="ruby-identifier">:photoset_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">set_number</span>, <span class="ruby-identifier">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'2000'</span>, <span class="ruby-identifier">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'1'</span>)
