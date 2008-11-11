@@ -112,6 +112,6 @@ if user_name && save_dir
   set.pull_photos
 else
   puts "-----------------------------------------------------"
-  puts "Usage: ./flickr_photos_in_a_set.rb USER_NAME SAVE_DIR"
+  puts "Usage: ./flickr_all_users_photos.rb USER_NAME SAVE_DIR"
   puts "-----------------------------------------------------"
 end
