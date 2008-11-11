@@ -107,7 +107,7 @@ save_dir  = ARGV[1]    # The path to where the photos will be saved
 
 # Make sure both arguments exist. Should probably use optparse to do this. It would be cleaner.
 if user_name && save_dir
-  # Create a new PhotosInASet object and pull the photos
+  # Create a new UserPhotos object and pull the photos
   set = UserPhotos.new(:user_name => user_name, :save_directory => save_dir)
   set.pull_photos
 else
