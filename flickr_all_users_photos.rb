@@ -23,7 +23,7 @@ require 'net/http'
 # This class will pull all of a user's original sized images from flickr. Must have a config.yaml in 
 # the same directory as this class specifying your api key and shared secret key. See
 # config.yaml.example included in this directory. 
-class PhotosInASet
+class UserPhotos
   
   attr_accessor :save_directory, :user_name
   
@@ -108,7 +108,7 @@ save_dir  = ARGV[1]    # The path to where the photos will be saved
 # Make sure both arguments exist. Should probably use optparse to do this. It would be cleaner.
 if user_name && save_dir
   # Create a new PhotosInASet object and pull the photos
-  set = PhotosInASet.new(:user_name => user_name, :save_directory => save_dir)
+  set = UserPhotos.new(:user_name => user_name, :save_directory => save_dir)
   set.pull_photos
 else
   puts "-----------------------------------------------------"
