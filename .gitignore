@@ -1,2 +1,3 @@
-config.yaml
+ssh/config.yaml
+flickr/config.yaml
 .DS_Store

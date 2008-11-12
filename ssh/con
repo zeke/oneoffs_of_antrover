@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+# Make this script executeable and place it in your path.
+# Add commonly ssh'd servers to the SERVERS hash.
+# Then type 'con home' which will ssh you into your home. The :alias key is what you reference the connection by.
+# Using aliases accomplishes the same thing. 
+# This is (was) an experiment.
+
+require 'yaml'
+
+# Possible servers live in the config.yaml file.
+CONFIG_PATH = File.join(File.dirname(__FILE__), 'config.yaml')
+SERVERS = File.open(CONFIG_PATH) { |yf| YAML::load( yf ) }
+
+# Finds the correct Server
+def find_by_alias(alias_to_find)
+  SERVERS.fetch("#{alias_to_find}")
+end
+
+selected_alias = ARGV[0] 
+
+begin
+  connection = find_by_alias(selected_alias)
+  puts "Connecting to: #{connection.inspect}"
+  exec "ssh #{connection['username']}@#{connection['host']} -p #{connection['port']}"  
+rescue IndexError
+  puts "--------   You need to supply a valid Alias   --------\n"  
+  SERVERS.each {|server| puts "#{server[1]['host']} - #{server[0]} - #{server[1]['username']}"}
+end  
