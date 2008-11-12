@@ -6,6 +6,9 @@ flickr/flickr_all_users_photos.rb
 flickr/flickr_all_photos_in_a_set.rb
 	Download all the photos in a set
 	
+flickr/flickr_pull_photos_in_a_tag.rb
+  Download all the users photos for a specific tag
+	
 fun/word_jumble.rb
 	Jumble up a sentence. Makes for a fun game.
 	
@@ -33,3 +36,9 @@ ssh/con
 	
 time_lapse_images/move_motion_picture_pics.rb
 	Organizes the pictures taken with the image_capture script by date.
+	
+	
+	
+	
+TODO:
+	All the flickr scripts that live in flickr/ have much in common. Common'ize them!
