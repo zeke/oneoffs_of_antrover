@@ -31,5 +31,5 @@ notes/note-combiner
 ssh/con
 	Makes it easy to connect to a server via ssh
 	
-time_lapse_images
+time_lapse_images/move_motion_picture_pics.rb
 	Organizes the pictures taken with the image_capture script by date.
