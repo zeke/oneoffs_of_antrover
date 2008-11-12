@@ -1,1 +1,35 @@
 Random scripts that quickly solved some problem in the past. Some useful... some not.
+
+flickr/flickr_all_users_photos.rb
+	Download all of a user's photos from flickr
+	
+flickr/flickr_all_photos_in_a_set.rb
+	Download all the photos in a set
+	
+fun/word_jumble.rb
+	Jumble up a sentence. Makes for a fun game.
+	
+image_capture/control.rb
+	Capture images from your iSight at a specific interval. Used to make 'time lapse' images of me when
+	I'm in front of my mac. Daemon script is included
+	
+image_utilities/resize.rb
+	Resize a directory of images at a given scale.
+	
+itunes/itunes_album_art_extractor.rb
+	Extract the majority of your album art from your itunes library
+	
+itunes/ituns_parser.rb
+	Put your itunes library into a mysql database. The options are endless of what to do with the data!
+	
+notes/notes
+	Create a notes skeleton in textmate.
+	
+notes/note-combiner
+	Takes all the individual notes created with the notes/notes script and creates one master notes file.
+	
+ssh/con
+	Makes it easy to connect to a server via ssh
+	
+time_lapse_images
+	Organizes the pictures taken with the image_capture script by date.
