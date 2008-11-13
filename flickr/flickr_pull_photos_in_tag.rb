@@ -58,7 +58,7 @@ class PhotosFromTag
   # * Downloads the 'Original' image if it exists
   # * Saves the 'Original' image in the specified save_directory  
   def pull_photos
-    username_info = flickr.people.findByUsername(:username => @username)
+    username_info = flickr.people.findByUsername(:username => @username) # why can't I do 'self.username' here? Works in the other flickr scripts!
     # user_info = flickr.people.getInfo(:user_id => username_info.nsid)
     photos = flickr.photos.search(:user_id => username_info.nsid, :tags => self.tag, :per_page => 500)
     
