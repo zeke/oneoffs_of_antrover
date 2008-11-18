@@ -25,5 +25,5 @@ begin
   exec "ssh #{connection['username']}@#{connection['host']} -p #{connection['port']}"  
 rescue IndexError
   puts "--------   You need to supply a valid Alias   --------\n"  
-  SERVERS.each {|server| puts "#{server[1]['host']} - #{server[0]} - #{server[1]['username']}"}
+  SERVERS.sort{|x,y| x[0] <=> y[0]}.each {|server| puts "#{server[0].rjust(20)} - #{server[1]['username'].ljust(12)} - #{server[1]['host']}"}
 end  
