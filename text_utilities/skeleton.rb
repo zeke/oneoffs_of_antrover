@@ -1,9 +1,18 @@
 #!/usr/local/bin/ruby -wKU
+# Creates an empty file with today's date
 
-# Creates an empty file titled like so: '10_24_1980-12:04:43-Untitled'
-# The first argument will be used as the title, otherwise 'Untitled' will be used.
-# Opens vim with the named file.
+require 'rubygems'
+require 'choice'
 
-title = ARGV[0] || 'Untitled'
-file_name = "#{Time.now.strftime('%m_%d_%Y-%H:%M:%S')}-#{title}.txt"
+Choice.options do
+  option :title do
+    short '-t'
+    long '--title=TITLE'
+    desc "Set the title of the blog"
+    default 'Untitled'
+  end
+end
+
+file_name = "#{Time.now.strftime('%m_%d_%Y-%H:%M:%S')}-#{Choice.choices[:title].gsub(" ", "_")}.md"
+
 exec("vim #{file_name}")

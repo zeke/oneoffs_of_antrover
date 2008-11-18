@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby -wKU
+
 require 'rubygems'
 require 'id3lib'
 include ID3Lib

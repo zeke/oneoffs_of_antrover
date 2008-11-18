@@ -29,3 +29,6 @@ Daemons.run(File.join(File.dirname(__FILE__), 'image_capture.rb'))
 
 # This is a one liner that'll work too:
 # convert -delay 1 *.png mpeg:time_lapse.mpeg
+
+# This one works best: (and is the fastest)
+# mencoder -nosound mf://*.png -mf w=640:h=480:type=jpg:fps=30 -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=2160000:mbd=2:keyint=132:v4mv:vqmin=3:lumi_mask=0.07:dark_mask=0.2:mpeg_quant:scplx_mask=0.1:tcplx_mask=0.1:naq -o /Users/dave/Desktop/output.avi
