@@ -75,43 +75,6 @@ class GroupPhotos
       times_to_loop +=1
     end
     
-    
-  #   # We can only get 500 photos at a time using flickraw, so see how many images there are and divide by 500.
-  #   # This will dictate how many times we have to call flickr.people.getPublicPhotos(:per_page)
-
-
-  #   # Set the loop up so the times to loop is less than or equal to the calculation that returns 'flickr_request_looper'
-  #   while times_to_loop <= flickr_request_looper
-  #     photos = flickr.people.getPublicPhotos(:user_id     => user_info.nsid, 
-  #                                            :safe_search => 'safe_search',
-  #                                            :extras      => 'extras',
-  #                                            :per_page    => per_page,
-  #                                            :page        => page)
-  #     photos.each do |photo|
-  #       begin
-  #         available_image_sizes = flickr.photos.getSizes(:photo_id => photo.id)
-  #         original_image_url = available_image_sizes.find {|x| x.label == "Original"}.source.gsub("\\","").gsub(" ", "")
-  #         unless File.exist?(File.join(self.save_directory,File.basename(original_image_url)))
-  #           puts "Downloading: #{original_image_url}"
-  #           url = URI.parse(original_image_url)
-  #           req = Net::HTTP::Get.new(url.path)
-  #           res = Net::HTTP.start(url.host, url.port) {|http|http.request(req)}
-  #           File.open(File.join(self.save_directory,File.basename(original_image_url)), 'wb') do |file|
-  #             file.write(res.body) # write the image file
-  #           end
-  #         else
-  #           # If the image already exists, we'll skip the download of the image.
-  #           puts "Skipping #{original_image_url}"
-  #         end
-  #       rescue NoMethodError => e
-  #         # this will happen if 'source' isn't in the returned XML because the user decided to hide the original size
-  #         puts "Photo unavailable - #{photo.id}"
-  #         next
-  #       end
-  #     end
-  #     page += 1 # Increase the page number to get
-  #     times_to_loop += 1 
-  #   end
   end
 
 end
