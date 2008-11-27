@@ -109,6 +109,7 @@ class GroupPhotos
             File.open(File.join(self.save_directory,File.basename(original_image_url)), 'wb') do |file|
               file.write(res.body) # write the image file
             end
+            GC.start # <-- the lamez
           else
             # If the image already exists, we'll skip the download of the image.
             puts "Skipping #{original_image_url}"
