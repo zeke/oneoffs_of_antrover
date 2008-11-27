@@ -115,10 +115,8 @@ class GroupPhotos
             puts "Skipping #{original_image_url}"
           end
         rescue NoMethodError => e
-          puts "----------------------- MAJOR ERROR -------------------"
           puts e
-          puts "--------------------- END MAJOR ERROR -----------------"
-          retry
+          next
         end
       end
       page += 1
