@@ -117,9 +117,7 @@ class GroupPhotos
         rescue NoMethodError => e
           puts "----------------------- MAJOR ERROR -------------------"
           puts e
-          puts "...will retry..."
           puts "--------------------- END MAJOR ERROR -----------------"
-          sleep(10)
           retry
         end
       end
